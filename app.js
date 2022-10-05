@@ -25,11 +25,28 @@ const emojis = [
 emojiBtns.forEach(btn => {
     btn.addEventListener("click",()=>{
         const userChoice = emojis.find(emoji => emoji.name === btn.dataset.emoji)
-        const computerChoice = makeComputerChoice()
-        addResult(userChoice.emoji,computerChoice.emoji, checkWin(userChoice, computerChoice),CURRENT_GAME_COUNT)
+        const computerChoice = makeComputerChoice(userChoice)
+        const winner = checkWin(userChoice,computerChoice)
+        incrementCounts(winner)
+        addResult(userChoice.emoji,computerChoice.emoji, winner,CURRENT_GAME_COUNT)
         CURRENT_GAME_COUNT++;
     })
 })
+
+function incrementCounts(msg){
+    const userScore = document.querySelector("#userScore")
+    const computerScore = document.querySelector("#computerScore")
+    if(msg === "You won"){
+        USER_WIN_COUNT++;
+        userScore.textContent = USER_WIN_COUNT
+        return
+    }
+    if(msg === "You lost"){
+        CPU_WIN_COUNT++;
+        computerScore.textContent = CPU_WIN_COUNT
+        return
+    }
+}
 
 function addResult(userEmoji, computerEmoji, winningMsg, currentGameCount){
     const resultsWrapper = document.querySelector("#resultsWrapper")
@@ -41,9 +58,10 @@ function addResult(userEmoji, computerEmoji, winningMsg, currentGameCount){
     resultsWrapper.append(resultTemplate)
 }
 
-function makeComputerChoice(){
-    let randomNumber = getRandomNumber(emojis.length)
-    const computerChoice = emojis.find(emoji => emoji.id === randomNumber)
+function makeComputerChoice(userChoice){
+    // let randomNumber = getRandomNumber(emojis.length)
+    const computerChoice = emojis.find(emoji => emoji.beats === userChoice.name)
+    
     return computerChoice
 }
 

@@ -21,7 +21,7 @@
 
 <body>
     <div class="container mx-auto">
-        <ul class="flex items-center justify-center items-center gap-10 mb-20 pt-40" id="emojiList">
+        <ul class="flex items-center justify-center items-center gap-10 mb-10 pt-40" id="emojiList">
             <li class="text-5xl cursor-pointer hover:bg-slate-100 rounded-[10px]" aria-label="Rock">
                 <button class="p-5" data-emoji="rock">👊</button>
             </li>
@@ -32,6 +32,14 @@
                 <button class="p-5" data-emoji="scissors">✌️</button>
             </li>
         </ul>
+    </div>
+
+    <!-- scores -->
+    <div class="container mx-auto">
+        <div class="flex justify-center items-center gap-20 mb-20">
+            <h3 class="text-5xl" id="userScore">0</h3>
+            <h3 class="text-5xl" id="computerScore">0</h3>
+        </div>
     </div>
 
     <!-- results -->
